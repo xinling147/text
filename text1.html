@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23级数据班(本)先进班集体展示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .chart-bar {
+            transition: width 1s ease-in-out;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card-hover {
+            background: linear-gradient(to bottom right, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.8));
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* 添加科技感动画 */
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.4; }
+        }
+
+        .tech-pulse {
+            animation: pulse 3s infinite;
+        }
+        
+        /* 响应式图片样式 */
+        .responsive-img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .responsive-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* 修改滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(17, 24, 39, 0.8);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-900 text-gray-200 dark:bg-black dark:text-gray-200 transition-colors duration-300">
+    <!-- 在body标签后添加背景装饰 -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <!-- 科技感网格背景 -->
+        <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(17, 24, 39, 0.8) 1px, transparent 1px), linear-gradient(to bottom, rgba(17, 24, 39, 0.8) 1px, transparent 1px); background-size: 30px 30px;"></div>
+        <!-- 动态光效 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-purple-900/20"></div>
+        <!-- 科技感光点 -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800">
+        <div class="max-w-[80%] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-chart-line text-primary-400 dark:text-primary-400 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">23级数据班</span>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="#intro" class="border-transparent text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">班级简介</a>
+                        <a href="#thought" class="border-transparent text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">思想引领</a>
+                        <a href="#study" class="border-transparent text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">成长研学</a>
+                        <a href="#data-display" class="border-transparent text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">数据展示</a>
+                        <a href="#activity" class="border-transparent text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">班级活动</a>
+                        <a href="#future" class="border-transparent text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">未来展望</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button id="theme-toggle" class="p-2 rounded-full text-gray-400 dark:text-gray-400 hover:bg-gray-700 dark:hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden border-t border-gray-700 dark:border-gray-700">
+            <div class="flex justify-between px-4 py-3 overflow-x-auto">
+                <a href="#intro" class="text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 px-3 py-1 text-sm font-medium whitespace-nowrap">班级简介</a>
+                <a href="#thought" class="text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 px-3 py-1 text-sm font-medium whitespace-nowrap">思想引领</a>
+                <a href="#study" class="text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 px-3 py-1 text-sm font-medium whitespace-nowrap">成长研学</a>
+                <a href="#data-display" class="text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 px-3 py-1 text-sm font-medium whitespace-nowrap">数据展示</a>
+                <a href="#activity" class="text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 px-3 py-1 text-sm font-medium whitespace-nowrap">班级活动</a>
+                <a href="#future" class="text-gray-300 dark:text-gray-300 hover:text-primary-400 dark:hover:text-primary-400 px-3 py-1 text-sm font-medium whitespace-nowrap">未来展望</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 头部横幅 -->
+    <header class="bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden min-h-screen">
+        <!-- 添加科技感装饰 -->
+        <div class="absolute inset-0">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);"></div>
+            <div class="absolute inset-0" style="background-image: linear-gradient(45deg, rgba(147, 51, 234, 0.1) 25%, transparent 25%, transparent 50%, rgba(147, 51, 234, 0.1) 50%, rgba(147, 51, 234, 0.1) 75%, transparent 75%, transparent); background-size: 100px 100px;"></div>
+        </div>
+
+        <!-- 添加循环播放的背景图片 -->
+        <div class="absolute inset-0 bg-gray-900/70">
+            <div class="absolute inset-0 transition-opacity duration-1000" id="slideshow">
+                <img src="01.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 transition-opacity duration-1000">
+                <img src="02.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+                <img src="03.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+                <img src="04.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+            </div>
+        </div>
+        <!-- 保持原有头部内容不变，但添加relative定位 -->
+        <div class="relative max-w-[80%] mx-auto py-32 px-4 sm:py-48 sm:px-6 lg:py-56 lg:px-8 text-center flex flex-col justify-center min-h-screen">
+            <p class="text-2xl sm:text-3xl lg:text-4xl text-indigo-100 mb-2 fade-in">2024—2025学年</p>
+            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-7xl fade-in leading-relaxed">
+                <span class="text-3xl sm:text-4xl lg:text-6xl">先进班集体汇报材料展示</span>
+            </h1>
+            <p class="mt-8 max-w-3xl mx-auto text-2xl text-indigo-100 fade-in">
+                数学与统计学院 ·23级数据班(本)
+            </p>
+            <div class="mt-12 fade-in">
+                <div class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md shadow-sm text-primary-700 bg-white hover:bg-gray-50 transition-colors">
+                     2025年3月31日
+                </div>
+            </div>
+        </div>
+        <!-- 添加图片切换的脚本 -->
+        <script>
+            // 图片切换效果
+            const images = document.querySelectorAll('#slideshow img');
+            let currentImageIndex = 0;
+
+            function cycleImages() {
+                // 隐藏当前图片
+                images[currentImageIndex].style.opacity = '0';
+                
+                // 计算下一张图片的索引
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                
+                // 显示下一张图片
+                images[currentImageIndex].style.opacity = '0.3';
+            }
+
+            // 设置初始图片
+            images[0].style.opacity = '0.3';
+            
+            // 每4秒切换一次图片
+            setInterval(cycleImages, 4000);
+        </script>
+    </header>
+    <main class="max-w-[80%] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- 班级简介 -->
+        <section id="intro" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white fade-in">班级简介</h2>
+                <div class="mt-2 h-1 w-20 bg-primary-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-users text-primary-400 mr-2"></i>
+                        班级构成
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="mb-2">全班共49名同学</p>
+                            <div class="flex justify-between items-center mb-1">
+                                <span>男生</span>
+                                <span>57%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-blue-500 h-2.5 rounded-full chart-bar" style="width: 57%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-3 mb-1">
+                                <span>女生</span>
+                                <span>43%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-pink-500 h-2.5 rounded-full chart-bar" style="width: 43%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span>少数民族</span>
+                                <span>24% (12人)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-green-400 h-2.5 rounded-full chart-bar" style="width: 24%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-3 mb-1">
+                                <span>汉族</span>
+                                <span>76% (37人)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-purple-400 h-2.5 rounded-full chart-bar" style="width: 76%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-flag text-primary-400 mr-2"></i>
+                        班级标识
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-lg mb-2">班训</h4>
+                            <p class="italic text-gray-300">
+                                "韶光不负追梦人，芳华待灼宜深耕"
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-lg mb-2">班徽</h4>
+                            <div class="flex flex-col items-center">
+                                <img src="banhui.png" alt="班徽" class="w-32 h-32 object-contain mb-4">
+                                <p class="text-gray-300 text-center">
+                                    由海燕、海豚、海洋、书本和望远镜组成，象征在信息海洋中寻找真理与知识。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-chalkboard-teacher text-primary-400 mr-2"></i>
+                    班级管理团队
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:border-primary-500 dark:hover:border-primary-400 transition-colors flex flex-col">
+                        <div class="w-full h-64 bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                            <img src="0.webp" alt="辅导员：周迪克" class="w-full h-full object-cover object-center responsive-img" style="object-position: center 20%">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-medium">辅导员：周迪克</h4>
+                            <p class="text-gray-300 text-sm mt-2">
+                                寄语：韶光不负追梦人，希望大家怀抱理想，明确所求；芳华待灼宜深耕，希望各位奋斗不息！
+                            </p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:border-primary-500 dark:hover:border-primary-400 transition-colors flex flex-col">
+                        <div class="w-full h-64 bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                            <img src="1.webp" alt="班主任：潘凤" class="w-full h-full object-cover object-center responsive-img" style="object-position: center 15%">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-medium">班主任：潘凤</h4>
+                            <p class="text-gray-300 text-sm mt-2">
+                                寄语：莫愁千里路，自有带来风，让我们携手同行，扬帆起航，逐梦前行，我与大家同在!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:border-primary-500 dark:hover:border-primary-400 transition-colors flex flex-col">
+                        <div class="w-full h-64 bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                            <img src="2.webp" alt="班主任：耿容" class="w-full h-full object-cover object-center responsive-img" style="object-position: center 20%">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-medium">班主任：耿容</h4>
+                            <p class="text-gray-300 text-sm mt-2">
+                                寄语：逐梦前行，吧负青春韶华。愿同学们在大学时光里收获知识与成长！
+                            </p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:border-primary-500 dark:hover:border-primary-400 transition-colors flex flex-col">
+                        <div class="w-full h-64 bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                            <img src="3.webp" alt="班长：付凯" class="w-full h-full object-cover object-center responsive-img">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-medium">班长：付凯</h4>
+                            <p class="text-gray-300 text-sm mt-2">
+                                寄语：纵有千古，横有八荒。前途似海，来日方长。愿大家万事顺遂，平安喜乐！
+                            </p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:border-primary-500 dark:hover:border-primary-400 transition-colors flex flex-col">
+                        <div class="w-full h-64 bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                            <img src="4.webp" alt="团支书：李遥" class="w-full h-full object-cover object-center responsive-img" style="object-position: center 20%">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-medium">团支书：李遥</h4>
+                            <p class="text-gray-300 text-sm mt-2">
+                                寄语：行有为之事，做有为青年，hopefully everyone can shine in the mundane life!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-clipboard-list text-primary-400 mr-2"></i>
+                    班级规章
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-primary-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">1</div>
+                            <h4 class="font-medium text-white">课堂纪律</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm">
+                            上课交手机，认真听讲，积极回答问题，尊重老师。
+                        </p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-primary-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">2</div>
+                            <h4 class="font-medium text-white">班级管理</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm">
+                            团结友爱，开展特色活动，每日考勤，遵守纪律。
+                        </p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-primary-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">3</div>
+                            <h4 class="font-medium text-white">学术诚信</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm">
+                            诚信考试，严禁作弊，保护环境，爱护公物。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 思想引领 -->
+        <section id="thought" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white fade-in">思想引领</h2>
+                <div class="mt-2 h-1 w-20 bg-primary-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-star text-primary-400 mr-2"></i>
+                        团建情况
+                    </h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">23</div>
+                            <p class="text-black">团员人数</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">7</div>
+                            <p class="text-black">优秀团员</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">19</div>
+                            <p class="text-black">提交入党申请书</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">4</div>
+                            <p class="text-black">入党积极分子</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-book text-primary-400 mr-2"></i>
+                        思想学习
+                    </h3>
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span>青年大学习完成率</span>
+                            <span class="font-medium">100%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-primary-500 dark:bg-primary-600 h-2.5 rounded-full chart-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        认真学习团课，每月进行青年和团员的教学，准时完成青年大学习。通过量变引发质变，提高了同学们的思想觉悟和入党、入团热情。
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-900 p-3 rounded-full">
+                            <i class="fas fa-hands-helping text-primary-400 text-xl"></i>
+                        </div>
+                        <h3 class="ml-3 text-lg font-semibold">公益活动</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        小学门口交通指挥，放学时分，抬手示意，车辆有序缓行，孩子们安全通过马路。
+                    </p>
+                    <div class="text-sm text-primary-600 dark:text-primary-400 font-medium">
+                        勇担社会责任，锤炼高尚品格
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-900 p-3 rounded-full">
+                            <i class="fas fa-broom text-primary-400 text-xl"></i>
+                        </div>
+                        <h3 class="ml-3 text-lg font-semibold">社区服务</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        进社区梅子湖卫生打扫，分工协作，清扫街道、擦拭设施。
+                    </p>
+                    <div class="text-sm text-primary-600 dark:text-primary-400 font-medium">
+                        共青团高擎旗帜，为志愿活动引航
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-900 p-3 rounded-full">
+                            <i class="fas fa-hand-holding-heart text-primary-400 text-xl"></i>
+                        </div>
+                        <h3 class="ml-3 text-lg font-semibold">爱心捐款</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        共青团发出温暖号召，团员青年们积极响应，投身公益捐款活动，以拳拳爱心传递希望，为社会注入正能量。
+                    </p>
+                    <div class="text-sm text-primary-600 dark:text-primary-400 font-medium">
+                        共赴团之号召，爱心捐款同行
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                <div class="flex items-center mb-4">
+                    <div class="bg-primary-900 p-3 rounded-full">
+                        <i class="fas fa-home text-primary-400 text-xl"></i>
+                    </div>
+                    <h3 class="ml-3 text-xl font-semibold">三下乡实践</h3>
+                </div>
+                <p class="text-gray-300">
+                    返家乡实践，触摸民生，用所学知识助力发展，不仅提升个人能力，更筑牢了美丽乡村的信念。
+                </p>
+                <div class="mt-4 text-center">
+                    <span class="inline-block bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 px-3 py-1 rounded-full text-sm font-medium">
+                        学思践悟，知行合一
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 成长研学 -->
+        <section id="study" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white fade-in">成长研学</h2>
+                <div class="mt-2 h-1 w-20 bg-primary-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                <div class="flex flex-col md:flex-row items-center mb-6">
+                    <div class="bg-primary-100 dark:bg-primary-900 p-4 rounded-full mb-4 md:mb-0">
+                        <i class="fas fa-award text-primary-400 text-3xl"></i>
+                    </div>
+                    <div class="md:ml-6 text-center md:text-left">
+                        <h3 class="text-xl font-semibold">班级荣誉</h3>
+                        <p class="text-gray-300 mt-2">
+                            在学校和老师的指导下，努力开展班级的学风建设，经过一学期的践行与努力，获得2023—2024学年校级先进班集体称号。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-primary-600 dark:text-primary-400">167+</div>
+                        <p class="text-black mt-2">总获奖项数</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-primary-600 dark:text-primary-400">2</div>
+                        <p class="text-black mt-2">国家级奖项</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-primary-600 dark:text-primary-400">30</div>
+                        <p class="text-black mt-2">省级奖项</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-primary-600 dark:text-primary-400">135</div>
+                        <p class="text-black mt-2">校级和院级奖项</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-trophy text-primary-400 mr-2"></i>
+                    竞赛获奖详情
+                </h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-700">
+                        <thead class="bg-gray-800">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">竞赛名称</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">一等奖</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">二等奖</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">三等奖</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">合计</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-900 divide-y divide-gray-700">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">全国大学生C语言程序设计大赛</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">4</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">11</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">15</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">计算机能力挑战赛（python）赛道</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">3</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">7</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">11</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">挑战杯全国大学生课外学术科技作品竞赛</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">读懂中国征文比赛</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2</td>
+                            </tr>
+                            <tr class="bg-gray-800">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">合计</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 font-medium">1</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 font-medium">8</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 font-medium">21</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 font-medium">30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                <div class="flex items-center mb-6">
+                    <div class="bg-gray-800 p-3 rounded-full">
+                        <i class="fas fa-certificate text-primary-400 text-xl"></i>
+                    </div>
+                    <h3 class="ml-3 text-xl font-semibold">技能证书获取情况</h3>
+                </div>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center">
+                    <div class="w-48 h-48 relative">
+                        <svg viewBox="0 0 36 36" class="w-full h-full">
+                            <path class="stroke-current text-gray-200 dark:text-gray-700" stroke-width="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path class="stroke-current text-primary-500" stroke-width="3" fill="none" stroke-dasharray="67, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <text x="18" y="20" class="text-xs font-semibold" text-anchor="middle" dominant-baseline="middle" font-size="0.3em" fill="white">67%</text>
+                        </svg>
+                    </div>
+                    <div class="md:ml-8 text-center md:text-left mt-4 md:mt-0">
+                        <p class="text-gray-300">全班共<span class="font-semibold text-primary-600 dark:text-primary-400">33人</span>获得技能证书</p>
+                        <p class="text-gray-300 mt-2">占班级总人数的<span class="font-semibold text-primary-600 dark:text-primary-400">67%</span></p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-4">包括计算机等级证书、英语能力证书、数据分析师证书等</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 数据展示 -->
+        <section id="data-display" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white fade-in">数据展示</h2>
+                <div class="mt-2 h-1 w-20 bg-primary-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 左侧：动态数据图表 -->
+                <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-chart-pie text-primary-400 mr-2"></i>
+                        竞赛获奖统计
+                    </h3>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <canvas id="awardsChart" width="400" height="300"></canvas>
+                        </div>
+                        <div>
+                            <canvas id="competitionChart" width="400" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧：数据汇总 -->
+                <div class="bg-gray-900 text-white rounded-xl shadow-md p-6 card-hover fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-table text-primary-400 mr-2"></i>
+                        获奖数据汇总
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-gray-50 dark:bg-gray-700">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">竞赛类别</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">一等奖</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">二等奖</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">三等奖</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">合计</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">全国大学生C语言程序设计大赛</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">4</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">11</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">15</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">计算机能力挑战赛（python）赛道</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">1</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">3</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">7</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">11</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">挑战杯全国大学生课外学术科技作品竞赛</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">1</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">1</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">读懂中国征文比赛</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">2</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">2</td>
+                                </tr>
+                                <tr class="bg-gray-50 dark:bg-gray-700">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">合计</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 font-medium">1</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 font-medium">8</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 font-medium">21</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 font-medium">30</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-8">
+                        <h4 class="font-medium text-lg mb-4">奖项获取趋势</h4>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">竞赛名称</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">一等奖</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">二等奖</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">三等奖</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">合计</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">全国大学生信息安全竞赛</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">0</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">1</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">3</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">4</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">数学建模竞赛</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">0</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">2</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">5</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">7</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 班级活动 -->
+        <section id="activity" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white fade-in">班级活动</h2>
+                <div class="mt-2 h-1 w-20 bg-primary-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-900 text-white rounded-xl shadow-md overflow-hidden card-hover fade-in">
+                    <div class="bg-primary-100 dark:bg-primary-900 h-3"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-gray-800 p-2 rounded-full">
+                                <i class="fas fa-comments text-primary-400"></i>
+                            </div>
+                            <h3 class="ml-3 text-lg font-semibold">班级辩论赛</h3>
+                        </div>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>锻炼逻辑思维</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>学会条理表达</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>提升语言表达能力</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>变得敢说、会说</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white rounded-xl shadow-md overflow-hidden card-hover fade-in">
+                    <div class="bg-primary-100 dark:bg-primary-900 h-3"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-gray-800 p-2 rounded-full">
+                                <i class="fas fa-theater-masks text-primary-400"></i>
+                            </div>
+                            <h3 class="ml-3 text-lg font-semibold">心灵筏-心理情景剧表演</h3>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            通过心理情景剧表演，同学们共同备赛，相互配合，不仅展示了才艺，更增进了彼此了解与友谊。
+                        </p>
+                        <div class="flex justify-center">
+                            <span class="inline-block bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 px-3 py-1 rounded-full text-sm font-medium">
+                                共同备赛 | 相互配合
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white rounded-xl shadow-md overflow-hidden card-hover fade-in">
+                    <div class="bg-primary-100 dark:bg-primary-900 h-3"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-gray-800 p-2 rounded-full">
+                                <i class="fas fa-basketball-ball text-primary-400"></i>
+                            </div>
+                            <h3 class="ml-3 text-lg font-semibold">班级友谊篮球赛</h3>
+                        </div>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>锻炼身体素质</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>提升耐力与爆发力</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>彼此配合，增进团队协作与默契</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 card-hover fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-calendar-alt text-primary-400 mr-2"></i>
+                        文体活动
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-moon text-primary-400 mr-2"></i>
+                                <h4 class="font-medium">中秋晚会</h4>
+                            </div>
+                            <p class="text-gray-300 text-sm">
+                                共度佳节，增进友谊，展示才艺
+                            </p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-medal text-primary-400 mr-2"></i>
+                                <h4 class="font-medium">体育竞赛</h4>
+                            </div>
+                            <p class="text-gray-300 text-sm">
+                                校级4项，院级13项奖项
+                            </p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-broom text-primary-400 mr-2"></i>
+                                <h4 class="font-medium">卫生打扫</h4>
+                            </div>
+                            <p class="text-gray-300 text-sm">
+                                保持教室整洁干净
+                            </p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-home text-primary-400 mr-2"></i>
+                                <h4 class="font-medium">文明宿舍</h4>
+                            </div>
+                            <p class="text-gray-300 text-sm">
+                                多次获得文明宿舍称号
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 card-hover fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-brain text-primary-400 mr-2"></i>
+                        心理健康活动
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        心理健康是指人在认知意志、平衡人际和社会关系等方面处于良好状态。
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                        <div class="bg-gray-800 rounded-lg p-3 hover:border-primary-400 transition-colors">
+                            <div class="flex items-center">
+                                <i class="fas fa-heart text-pink-500 mr-2"></i>
+                                <h4 class="font-medium text-sm">心理健康讲座</h4>
+                            </div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-3 hover:border-primary-400 transition-colors">
+                            <div class="flex items-center">
+                                <i class="fas fa-users text-blue-500 mr-2"></i>
+                                <h4 class="font-medium text-sm">团体心理辅导</h4>
+                            </div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-3 hover:border-primary-400 transition-colors">
+                            <div class="flex items-center">
+                                <i class="fas fa-comments text-green-500 mr-2"></i>
+                                <h4 class="font-medium text-sm">朋辈心理互助</h4>
+                            </div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-3 hover:border-primary-400 transition-colors">
+                            <div class="flex items-center">
+                                <i class="fas fa-gamepad text-purple-500 mr-2"></i>
+                                <h4 class="font-medium text-sm">心理游戏活动</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 未来展望 -->
+        <section id="future" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white fade-in">未来展望</h2>
+                <div class="mt-2 h-1 w-20 bg-primary-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="bg-gray-900 text-white rounded-xl shadow-md p-8 card-hover fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-road text-primary-400 mr-2"></i>
+                            班级未来规划
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-gray-800 flex items-center justify-center">
+                                    <i class="fas fa-check text-primary-400 text-sm"></i>
+                                </div>
+                                <p class="ml-3 text-gray-300">减少挂科率</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-gray-800 flex items-center justify-center">
+                                    <i class="fas fa-check text-primary-400 text-sm"></i>
+                                </div>
+                                <p class="ml-3 text-gray-300">同学互帮互助，共同进步</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-gray-800 flex items-center justify-center">
+                                    <i class="fas fa-check text-primary-400 text-sm"></i>
+                                </div>
+                                <p class="ml-3 text-gray-300">携手参与各项学科竞赛</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-gray-800 flex items-center justify-center">
+                                    <i class="fas fa-check text-primary-400 text-sm"></i>
+                                </div>
+                                <p class="ml-3 text-gray-300">实现高质量就业，拿到理想offer</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h4 class="font-medium text-lg mb-4 text-center flex items-center justify-center">
+                            <i class="fas fa-quote-left text-primary-400 mr-2"></i>
+                            学生结语
+                        </h4>
+                        <blockquote class="italic text-gray-300 border-l-4 border-primary-500 pl-4">
+                            "宝剑锋从磨砺出，梅花香自苦寒来"，人是在不断的磨练中长长的，就像一棵小树一样，只有经历过风雨的洗礼才能长成参天大树。
+                        </blockquote>
+                        <div class="mt-6 text-center">
+                            <span class="inline-block bg-gray-700 text-primary-400 px-4 py-2 rounded-full text-sm font-medium">
+                                放飞梦想，面向未来
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <div class="flex items-center">
+                        <i class="fas fa-chart-line text-black text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-black">23级数据班(本)</span>
+                    </div>
+                    <p class="mt-4 text-black">
+                        数学与统计学院 · 2025年3月31日
+                    </p>
+                    <p class="mt-2 text-black text-sm">
+                        汇报人：徐燕玲
+                    </p>
+                </div>
+                <div class="md:text-right">
+                    <h3 class="text-lg font-semibold mb-4 text-black">联系我们</h3>
+                    <div class="flex md:justify-end space-x-4">
+                        <a href="#" class="text-black hover:text-primary-500">
+                            <i class="fab fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-primary-500">
+                            <i class="fab fa-qq text-xl"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-primary-500">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-black text-sm">
+                        © 2025 23级数据班(本). 版权所有.
+                    </p>
+                    <div class="mt-4 md:mt-0">
+                        <p class="text-black text-sm">
+                            作者：徐燕玲 | <a href="https://www.deepseek.com/" class="text-black hover:underline">QQ</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 深色模式切换
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        // 检查系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        
+        // 切换深色/浅色模式
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+        
+        // 滚动动画
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // 初始检查
+        window.addEventListener('load', checkFade);
+        // 滚动时检查
+        window.addEventListener('scroll', checkFade);
+        
+        // 图表动画
+        const chartBars = document.querySelectorAll('.chart-bar');
+        
+        function initCharts() {
+            chartBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        }
+        
+        window.addEventListener('load', initCharts);
+        
+        // 初始化Chart.js图表
+        window.addEventListener('load', function() {
+            // 设置Chart.js默认配置
+            Chart.defaults.color = document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#4b5563';
+            Chart.defaults.borderColor = document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            
+            // 监听主题变化，更新图表颜色
+            themeToggle.addEventListener('click', () => {
+                // 延迟执行以确保主题已切换
+                setTimeout(() => {
+                    // 更新饼图
+                    awardsChart.options.plugins.legend.labels.color = document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#4b5563';
+                    awardsChart.update();
+                    
+                    // 更新柱状图
+                    competitionChart.options.scales.x.ticks.color = document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#4b5563';
+                    competitionChart.options.scales.y.ticks.color = document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#4b5563';
+                    competitionChart.update();
+                }, 100);
+            });
+            
+            // 奖项类型饼图
+            const awardsCtx = document.getElementById('awardsChart').getContext('2d');
+            const awardsChart = new Chart(awardsCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['一等奖', '二等奖', '三等奖'],
+                    datasets: [{
+                        label: '奖项分布',
+                        data: [1, 8, 21],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: 'Inter',
+                                    size: 12
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '奖项类型分布',
+                            font: {
+                                family: 'Inter',
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        },
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        }
+                    }
+                }
+            });
+            
+            // 竞赛类型柱状图
+            const competitionCtx = document.getElementById('competitionChart').getContext('2d');
+            const competitionChart = new Chart(competitionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['C语言程序设计', 'Python挑战赛', '挑战杯', '读懂中国征文', '信息安全竞赛', '数学建模'],
+                    datasets: [{
+                        label: '获奖总数',
+                        data: [15, 11, 1, 2, 4, 7],
+                        backgroundColor: 'rgba(14, 165, 233, 0.7)',
+                        borderColor: 'rgba(14, 165, 233, 1)',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                        hoverBackgroundColor: 'rgba(14, 165, 233, 0.9)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                display: true,
+                                drawBorder: false,
+                                color: function(context) {
+                                    return document.documentElement.classList.contains('dark') ? 
+                                        'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+                                }
+                            },
+                            ticks: {
+                                precision: 0
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: '各竞赛获奖情况',
+                            font: {
+                                family: 'Inter',
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `获奖数量: ${context.raw}`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+            
+            // 添加交互性 - 点击饼图切换柱状图数据
+            awardsCtx.canvas.onclick = function(evt) {
+                const points = awardsChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+                
+                if (points.length) {
+                    const firstPoint = points[0];
+                    const label = awardsChart.data.labels[firstPoint.index];
+                    
+                    // 根据点击的奖项类型更新柱状图数据
+                    let newData;
+                    if (label === '一等奖') {
+                        newData = [0, 1, 0, 0, 0, 0];
+                        competitionChart.data.datasets[0].backgroundColor = 'rgba(255, 99, 132, 0.7)';
+                        competitionChart.data.datasets[0].borderColor = 'rgba(255, 99, 132, 1)';
+                    } else if (label === '二等奖') {
+                        newData = [4, 3, 1, 0, 1, 2];
+                        competitionChart.data.datasets[0].backgroundColor = 'rgba(54, 162, 235, 0.7)';
+                        competitionChart.data.datasets[0].borderColor = 'rgba(54, 162, 235, 1)';
+                    } else if (label === '三等奖') {
+                        newData = [11, 7, 0, 2, 3, 5];
+                        competitionChart.data.datasets[0].backgroundColor = 'rgba(255, 206, 86, 0.7)';
+                        competitionChart.data.datasets[0].borderColor = 'rgba(255, 206, 86, 1)';
+                    }
+                    
+                    // 更新标题和数据
+                    competitionChart.options.plugins.title.text = `各竞赛${label}获奖情况`;
+                    competitionChart.data.datasets[0].label = label;
+                    competitionChart.data.datasets[0].data = newData;
+                    competitionChart.update();
+                }
+            };
+        });
+    </script>
+</body>
+</html>
